@@ -20,7 +20,7 @@ const CreatePost = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/prompt/new", {
+      const response = await fetch("/api/diary/new", {
         method: "POST",
         body: JSON.stringify({
           diary: post.diary,
