@@ -6,12 +6,10 @@ const Home = () => {
       <h1 className="head_text text-center">
         Let's post
         <br className='max-md:hidden' />
-        <span className="orange_gradient text-center"> How you feel rn in CoE?</span>
+        <span className="orange_gradient text-center"> How you feel right now in CoE?</span>
       </h1>
       <p className="desc text-center">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni tempore
-        provident labore. Officia, quasi enim, veritatis dolores quae ipsum in
-        beatae nemo atque quod, tenetur eius doloribus? Ducimus, tenetur iste.
+        By 6510110356 and 6510110041
       </p>
 
       {/* Feed */}
