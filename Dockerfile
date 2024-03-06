@@ -12,7 +12,7 @@ ENV NEXTAUTH_URL=http://localhost:3000
 ENV NEXTAUTH_URL_INTERNAL=http://localhost:3000
 ENV NEXTAUTH_SECRET=ILs1hhJGBi0h9VAr8VRjTcKk1DqCBkKf6qn66jTBu+Y=
 
-RUN npm install
+RUN npm ci --only=production
 RUN npm run build
 EXPOSE 3000
 CMD ["npm", "run","start"]
