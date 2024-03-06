@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
@@ -10,7 +10,7 @@ const UpdateDiary = () => {
   const searchParams = useSearchParams();
   const diaryId = searchParams.get("id");
 
-  const [post, setPost] = useState({ diary: "", tag: "", });
+  const [post, setPost] = useState({ diary: "", tag: "" });
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -52,13 +52,15 @@ const UpdateDiary = () => {
   };
 
   return (
-    <Form
-      type='Edit'
-      post={post}
-      setPost={setPost}
-      submitting={submitting}
-      handleSubmit={updateDiary}
-    />
+    <Suspense fallback={<div>Loading...</div>}>
+      <Form
+        type="Edit"
+        post={post}
+        setPost={setPost}
+        submitting={submitting}
+        handleSubmit={updateDiary}
+      />
+    </Suspense>
   );
 };
 
