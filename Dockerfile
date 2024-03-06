@@ -1,30 +1,18 @@
-# Use the slim version of the node 14 image as our base
-FROM node:20-alpine
+FROM node:20-buster
+RUN mkdir /app
+COPY package.json /app/
+WORKDIR /app
+COPY . ./
 
-# Create a directory for our application in the container 
-RUN mkdir -p /usr/src/app
+ENV GOOGLE_ID=510781597310-r9089pt1a3m1uhk64boimumuppfle2ta.apps.googleusercontent.com
+ENV GOOGLE_CLIENT_SECRET=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
+ENV MONGODB_URI=mongodb+srv://coediary:RCvgVDTsuujlQMkl@cluster1.wnxar7i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1
 
-# Set this new directory as our working directory for subsequent instructions
-WORKDIR /usr/src/app
+ENV NEXTAUTH_URL=http://localhost:3000
+ENV NEXTAUTH_URL_INTERNAL=http://localhost:3000
+ENV NEXTAUTH_SECRET=ILs1hhJGBi0h9VAr8VRjTcKk1DqCBkKf6qn66jTBu+Y=
 
-# Copy all files in the current directory into the container
-COPY . .
-
-# Set the PYTHONPATH environment variable, which is occasionally necessary for certain node packages
-# 'PWD' is an environment variable that stores the path of the current working directory
-ENV PYTHONPATH=${PYTHONPATH}:${PWD}
-
-# Set the environment variable for the application's port
-# (Be sure to replace '4200' with your application's specific port number if different)
-ENV PORT 3000
-
-# Install 'serve', a static file serving package globally in the container
-RUN npm install -g serve
-
-# Install all the node modules required by the React app
 RUN npm install
-# Build the React app
 RUN npm run build
-
-# Serve the 'build' directory on port 3000 using 'serve'
-CMD ["serve", "-s", "-l", "3000", "./build"]
+EXPOSE 3000
+CMD ["npm", "run","start"]
