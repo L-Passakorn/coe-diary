@@ -1,7 +1,9 @@
-FROM node:20-buster
-RUN mkdir /app
-COPY package.json /app/
+FROM node:20-alpine
 WORKDIR /app
+
+COPY package.json ./
+RUN npm install
+
 COPY . ./
 
 ENV GOOGLE_ID=510781597310-r9089pt1a3m1uhk64boimumuppfle2ta.apps.googleusercontent.com
@@ -12,7 +14,9 @@ ENV NEXTAUTH_URL=http://localhost:3000
 ENV NEXTAUTH_URL_INTERNAL=http://localhost:3000
 ENV NEXTAUTH_SECRET=ILs1hhJGBi0h9VAr8VRjTcKk1DqCBkKf6qn66jTBu+Y=
 
-RUN npm ci --only=production
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "run","start"]
+# RUN npm ci --only=production
+# RUN npm run build
+# EXPOSE 3000
+# CMD ["npm", "run","start"]
+
+CMD ["npm","run","dev"]
